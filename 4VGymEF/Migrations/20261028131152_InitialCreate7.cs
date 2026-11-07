@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -18,7 +18,7 @@ namespace _4VGymEF.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberMonitors = table.Column<int>(type: "int", nullable: false)
+                    NumberInstructors = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,7 +26,7 @@ namespace _4VGymEF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Intructors",
+                name: "Instructors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -38,7 +38,7 @@ namespace _4VGymEF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Intructors", x => x.Id);
+                    table.PrimaryKey("PK_Instructors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,9 +79,9 @@ namespace _4VGymEF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActivityInstructor_Intructors_InstructorsId",
+                        name: "FK_ActivityInstructor_Instructors_InstructorsId",
                         column: x => x.InstructorsId,
-                        principalTable: "Intructors",
+                        principalTable: "Instructors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -107,7 +107,7 @@ namespace _4VGymEF.Migrations
                 name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "Intructors");
+                name: "Instructors");
 
             migrationBuilder.DropTable(
                 name: "ActivityTypes");

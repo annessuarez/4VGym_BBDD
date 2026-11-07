@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace _4VGymEF.Models
 {
@@ -8,7 +8,7 @@ namespace _4VGymEF.Models
 
         public string Name { get; set; } = string.Empty;
 
-        public int NumberMonitors { get; set; } = 1;
+        public int NumberInstructors { get; set; } = 1;
 
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
 
