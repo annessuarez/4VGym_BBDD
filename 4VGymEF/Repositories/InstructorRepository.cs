@@ -49,7 +49,7 @@ namespace _4VGymEF.Repositories
 
             if (exists)
             {
-                errorResponse = new ErrorResponse(34, "An instructor with the same email or name already exists");
+                errorResponse = new ErrorResponse(ErrorCode.InstructorDuplicado, "Ya existe un instructor con ese nombre o email.");
                 return null;
             }
 
