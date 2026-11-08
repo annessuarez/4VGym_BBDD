@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace _4VGymEF.Validations
 {
@@ -7,7 +7,6 @@ namespace _4VGymEF.Validations
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            // Si el valor es nulo, dejamos que la responsabilidad de requerirlo sea del atributo [Required]
             if (value is null)
             {
                 return ValidationResult.Success;
@@ -15,13 +14,11 @@ namespace _4VGymEF.Validations
 
             if (value is DateTime fechaIngresada)
             {
-                // Comparación directa con la fecha/hora actual del sistema
                 if (fechaIngresada > DateTime.Now)
                 {
                     return ValidationResult.Success;
                 }
 
-                // Error personalizado si la fecha no es futura
                 string mensajeError = ErrorMessage ?? "La fecha debe ser posterior al momento actual.";
                 return new ValidationResult(mensajeError);
             }

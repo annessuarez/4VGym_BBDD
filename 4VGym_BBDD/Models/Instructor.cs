@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace _4VGymEF.Models
 {
@@ -10,20 +10,18 @@ namespace _4VGymEF.Models
 
         public string Email { get; set; } = string.Empty;
 
-        [JsonPropertyName("photo_url")] //para que ell json salga con el nombre correcto
+        [JsonPropertyName("photo_url")]
         public string PhotoUrl { get; set; } = string.Empty;
 
         public string Phone { get; set; } = string.Empty;
 
-        [JsonIgnore] //paraq no intente meter las actividades en el JSON del instructor
+        [JsonIgnore]
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
 
-        //Importante añadir este método porq sino no funcionara en el controlador.
         public bool isEmpty()
         {
             return string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(PhotoUrl)
                 && string.IsNullOrEmpty(Phone);
         }
-
     }
 }

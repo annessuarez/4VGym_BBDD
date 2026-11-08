@@ -1,4 +1,4 @@
-﻿using _4VGymEF.Data;
+using _4VGymEF.Data;
 using _4VGymEF.Models;
 
 namespace _4VGymEF.Repositories
@@ -13,7 +13,7 @@ namespace _4VGymEF.Repositories
 
         public IEnumerable<ActivityType> GetAll()
         {
-            return _context.ActivityTypes;
+            return _context.ActivityTypes.ToList();
         }
 
         public ActivityType? GetByName(string name)
@@ -32,7 +32,6 @@ namespace _4VGymEF.Repositories
         public ActivityType Add(ActivityType activityType)
         {
             int maxID = 0;
-            //busca en la bbdd si hay algun AT y si hay busca el id más alto
             if (_context.ActivityTypes.Any())
             {
                 maxID = _context.ActivityTypes.Max(at => at.Id);
@@ -41,8 +40,6 @@ namespace _4VGymEF.Repositories
             activityType.Id = maxID + 1;
 
             return activityType;
-
         }
-
     }
 }

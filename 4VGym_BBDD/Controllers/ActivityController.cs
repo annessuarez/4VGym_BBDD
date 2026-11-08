@@ -1,4 +1,4 @@
-﻿using _4VGymEF.Models;
+using _4VGymEF.Models;
 using _4VGymEF.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +17,6 @@ namespace _4VGymEF.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ActivityCreateDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-        //importante el ActivityCreateDto sino da fallo
         public ActionResult<ActivityCreateDto> CreateActivity([FromBody] ActivityCreateDto activity)
         {
             try
@@ -35,9 +34,7 @@ namespace _4VGymEF.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                   new ErrorResponse(ErrorCode.ErrorInternoEnServidor, "An internal server error occurred"));
-
             }
         }
-
     }
 }

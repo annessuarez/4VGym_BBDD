@@ -1,4 +1,4 @@
-﻿using _4VGymEF.Data;
+using _4VGymEF.Data;
 using _4VGymEF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,10 +7,6 @@ namespace _4VGymEF.Repositories
 {
     public class InstructorRepository
     {
-        // En API sería: private Dictionary<long, Instructor> _instructors = new(); + constructor, ahora en 
-        // EF hay que crear un objeto de tipo GymDbContext
-        // Ahora tampoco necesitamos el SeedData() porq para eso esta el fichero .sql de antes.
-
         private readonly GymDbContext _context;
         public InstructorRepository(GymDbContext context)
         {
@@ -19,7 +15,6 @@ namespace _4VGymEF.Repositories
 
         public IEnumerable<Instructor> GetAll()
         {
-            //Antes era _instructors.Values.ToList(); ahora hay que usar el _context
             return _context.Instructors.ToList();
         }
 
@@ -30,7 +25,6 @@ namespace _4VGymEF.Repositories
 
         public IEnumerable<Instructor> GetByFirstInitial(string? firstInitial = null)
         {
-            //por si firstInitial es nulo o esta vacio, si es TRUE devulve todos, si es FALSE devuelve la lista
             if (String.IsNullOrEmpty(firstInitial))
             {
                 return GetAll();
@@ -40,11 +34,10 @@ namespace _4VGymEF.Repositories
 
         public Instructor? Add(Instructor instructorNew, out ErrorResponse? errorResponse)
         {
-            //en este solo hay que comprobar, NO AÑADIR
             errorResponse = null;
-            // Comprobación de duplicados (Email o Nombre existente, ignorando mayúsculas/minúsculas)
+
             bool exists = _context.Instructors.Any(instructor =>
-                instructor.Email == instructorNew.Email ||instructor.Name == instructorNew.Name);
+                instructor.Email == instructorNew.Email || instructor.Name == instructorNew.Name);
 
             if (exists)
             {
@@ -53,17 +46,6 @@ namespace _4VGymEF.Repositories
             }
 
             return instructorNew;
-
-            //NO ES NECESARIO SOLO SON APUNTES:
-            /* Añade el objeto a la tabla
-                _context.Instructors.Add(instructorNew);
-
-               Guarda los cambios en SQL Server (hace el INSERT y le da el ID automático)
-                _context.SaveChanges();
-                return instructorNew;
-             */
         }
-
-
     }
 }
