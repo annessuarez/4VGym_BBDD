@@ -15,10 +15,10 @@ namespace _4VGymEF.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(Activity), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ActivityCreateDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         //importante el ActivityCreateDto sino da fallo
-        public ActionResult<Activity> CreateActivity([FromBody] ActivityCreateDto activity)
+        public ActionResult<ActivityCreateDto> CreateActivity([FromBody] ActivityCreateDto activity)
         {
             try
             {
