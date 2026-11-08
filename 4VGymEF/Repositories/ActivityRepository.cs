@@ -13,15 +13,31 @@ namespace _4VGymEF.Repositories
             _context = context;
         }
 
-        public Activity? Add(Activity activity, out List<ErrorResponse> errorResponse)
+        //Hay que poner ActivityCreateDto porq es el que tiene ActivityTypeId e InstructorsId 
+        public ActivityCreateDto? Add(ActivityCreateDto activity, out List<ErrorResponse> errorResponse)
         {
-            errorResponse = null;
+            errorResponse = new List<ErrorResponse>();
 
-            if (_context.ActivityTypes.GetById(activity.ActivityTypeId) == null)
+            if (_context.ActivityTypes.Any())
             {
-                errorResponse.Add(new ErrorResponse(34, "EL tipo de actividad debe de funcionar"));
+                errorResponse.Add(new ErrorResponse(ErrorCode.ActivityTypeNoEncontrado, "El tipo de actividad debe existir"));
             }
 
+            foreach (var idInstructor in activity.InstructorsId)
+            {
+                if (!_context.Activities.Any(i => i.Id == idInstructor))
+                {
+                    errorResponse.Add(new ErrorResponse(ErrorCode.InstructorNoEncontrado, "No se ha encontrado instructor con ID " + idInstructor));
+                }
+            }
+
+            if (errorResponse.Count > 0)
+            {
+                return null;
+            }
+
+            return activity;
 
         }
     }
+}
