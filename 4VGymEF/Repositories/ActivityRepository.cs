@@ -18,14 +18,14 @@ namespace _4VGymEF.Repositories
         {
             errorResponse = new List<ErrorResponse>();
 
-            if (_context.ActivityTypes.Any())
+            if (!_context.ActivityTypes.Any(at => at.Id == activity.ActivityTypeId))
             {
                 errorResponse.Add(new ErrorResponse(ErrorCode.ActivityTypeNoEncontrado, "El tipo de actividad debe existir"));
             }
 
             foreach (var idInstructor in activity.InstructorsId)
             {
-                if (!_context.Activities.Any(i => i.Id == idInstructor))
+                if (!_context.Instructors.Any(i => i.Id == idInstructor))
                 {
                     errorResponse.Add(new ErrorResponse(ErrorCode.InstructorNoEncontrado, "No se ha encontrado instructor con ID " + idInstructor));
                 }
