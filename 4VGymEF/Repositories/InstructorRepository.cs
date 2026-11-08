@@ -44,8 +44,7 @@ namespace _4VGymEF.Repositories
             errorResponse = null;
             // Comprobación de duplicados (Email o Nombre existente, ignorando mayúsculas/minúsculas)
             bool exists = _context.Instructors.Any(instructor =>
-                instructor.Email.Equals(instructorNew.Email, StringComparison.CurrentCultureIgnoreCase) ||
-                instructor.Name.Equals(instructorNew.Name, StringComparison.CurrentCultureIgnoreCase));
+                instructor.Email == instructorNew.Email ||instructor.Name == instructorNew.Name);
 
             if (exists)
             {
